@@ -1,2 +1,0 @@
-use pyhook
-capture the time of keystroke, so we can display the time the last keystroke was pressed, which will be useful for unattended tests 
