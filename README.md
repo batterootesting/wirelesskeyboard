@@ -32,3 +32,10 @@ Requires Python and Xlib
 Download both files, put in same directory, from a terminal run: python tester.py
 
 Written for Python 2.7
+
+Mac
+-----
+
+I don't have a Mac. I have access to one now and then, so I can whip up something quick. But hard to maintain. 
+
+Help is welcome!
