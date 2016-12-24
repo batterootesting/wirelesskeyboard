@@ -5,8 +5,8 @@ import pyHook
 
 def keystroke_pressed(key_pressed):
     # uncomment to see key pressed
-    print key_pressed.Key
-    print key_pressed.Ascii
+    #print key_pressed.Key
+    #print key_pressed.Ascii
     counter()
 
     # press 'Esc' key to quit
