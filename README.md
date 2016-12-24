@@ -28,5 +28,7 @@ It still complained, so I also ran: pip install pypiwin32
 Linux
 -------
 Requires Python and Xlib
+
 Download both files, put in same directory, from a terminal run: python tester.py
+
 Written for Python 2.7
