@@ -1,4 +1,4 @@
-# wireless keyboard tester for windows
+# wireless keyboard battery tester for windows
 # windows 10
 import Tkinter
 import pythoncom
