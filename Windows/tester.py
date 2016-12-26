@@ -54,7 +54,7 @@ class WKB_Tester(Tkinter.Tk):
             self.count += 1
             print self.count
             # *****  this function causes the program to lock up *****
-            #self.num_of_keystrokes_var.set(str(self.count))
+            self.num_of_keystrokes_var.set(str(self.count))
 
         counter(self)
 
