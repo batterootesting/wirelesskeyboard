@@ -82,7 +82,7 @@ class WKB_Tester(Tkinter.Tk):
 if __name__ == "__main__":
     top = WKB_Tester(None)
     top.title("Wireless Keyboard Battery Tester")
-    top.wm_iconbitmap("favicon.ico")
+    top.wm_iconbitmap("icon.ico")
     top.configure(background="#ffffff")
 
     top.mainloop()
