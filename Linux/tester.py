@@ -12,30 +12,49 @@
 import pyxhook
 import time
 
-def keystroke_pressed(key_pressed):
-    # uncomment below to see the key pressed
-    #print key_pressed
-    counter()
+start_time = 0
+last_keystroke_time = 0
 
+def on_keyboard_event(event):
+    #print event
+    global last_keystroke_time
+    # print report 'Space Bar' - don't count the space bar press! 
+    if event.Ascii == 32:
+        global start_time
+        print_report(start_time, last_keystroke_time)
     # press 'Esc' key to quit
-    if key_pressed.Ascii == 27:
+    elif event.Ascii == 27:
         global running
         running = False
+    else: 
+        # do these LAST
+        last_keystroke_time = time.localtime()
+        counter()
+
 
 def counter():
     counter.count += 1
 
+def print_report(start_time, last_keystroke_time):
+    print "\n"
+    print "-------------------------------------"
+    print "Start time: " + time.strftime("%b %d %Y %H:%M:%S", start_time)
+    print "-------------------------------------"
+    print "Keys have been pressed " + str(counter.count) + " times"
+    print "-------------------------------------"
+    print "Last keystroke: " + time.strftime("%b %d %Y %H:%M:%S", last_keystroke_time)
+    print "-------------------------------------"
+    print "\n"
+
 hookmanager = pyxhook.HookManager()
-
-hookmanager.KeyDown = keystroke_pressed
-
+hookmanager.KeyDown = on_keyboard_event
 hookmanager.HookKeyboard()
-
 hookmanager.start()
 
-# start counter at 0
 # note pressing the escape key counts as a key!
 counter.count = 0
+
+start_time = time.localtime()
 
 running = True
 
@@ -44,7 +63,4 @@ while running:
 
 hookmanager.cancel()
 
-print "\n"
-print "-------------------------------------"
-print "Keys have been pressed " + str(counter.count) + " times"
-print "-------------------------------------"
+print_report(start_time, last_keystroke_time)
