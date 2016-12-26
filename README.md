@@ -4,9 +4,8 @@ It's quick and dirty right now!
 
 TODO: 
 -------
-- Shifting focus to Linux version, for use with Raspberry Pi
+- Focus on Linux version for use with Raspberry Pi
 - Fix the broken Windows tester.py - it cannot do a 'live' update of keystrokes pressed. May have something to do with threads
-- Capture the time of keystroke, so we can display the time the last keystroke was pressed, which will be useful for unattended tests.
 
 Updates
 --------
