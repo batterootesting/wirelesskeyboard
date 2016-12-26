@@ -60,14 +60,6 @@ class WKB_Tester(Tkinter.Tk):
 
         return True
 
-    # this works if I just remove the hookmanager stuff and call this function
-    def my_kb_event_test(self):
-        def counter(self):
-            self.count += 1
-
-        counter(self)
-        self.num_of_keystrokes_var.set(str(self.count))
-
     def start_counting(self):
         print "Starting counting..."
         self.start_time_var.set(time.strftime("%b %d %Y %H:%M:%S", time.localtime()))
