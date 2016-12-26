@@ -10,7 +10,7 @@ TODO:
 Updates
 --------
 - Linux version now captures start time and time of last keystroke
-- Linux version - space bar gives progress report without updating last keystroke time or counting a keystroke (useful when upi switch batteries with fresh ones - just press space bar to to report without updating the last keystroke time)
+- Linux version - space bar gives progress report without updating last keystroke time or counting a keystroke (useful when you switch batteries with fresh ones - just press space bar to to report without updating the last keystroke time)
 
 Thoughts
 ---------
