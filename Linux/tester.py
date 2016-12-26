@@ -7,7 +7,9 @@
 # Visit GitHub https://github.com/JeffHoogland/pyxhook
 # Just Download the raw pyxhook.py file and put it in the same folder as this script
 # and run this script with python 
-# Press Esc at any time to Quit and show the count - remember Esc counts as a key! 
+# Press Space Bar to get a progress update, it won't count the Space Bar as a keystroke
+# Press Esc at any time to Quit, it won't count the Esc as a keystroke
+
 
 import pyxhook
 import time
@@ -18,7 +20,7 @@ last_keystroke_time = 0
 def on_keyboard_event(event):
     #print event
     global last_keystroke_time
-    # print report 'Space Bar' - don't count the space bar press! 
+    # print report 'Space Bar' - 
     if event.Ascii == 32:
         global start_time
         print_report(start_time, last_keystroke_time)
