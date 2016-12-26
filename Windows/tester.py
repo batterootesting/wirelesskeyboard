@@ -55,13 +55,12 @@ class WKB_Tester(Tkinter.Tk):
 
     def counter(self):
         self.count += 1
-        print self.count
+        #print self.count
         self.num_of_keystrokes_var.set(str(self.count))
         self.last_time_var.set(time.strftime("%b %d %Y %H:%M:%S", time.localtime()))
 
     def on_keyboard_event(self, event):
-        print event.Key
-        #print key_pressed.Ascii
+        #print event.Key
 
         thread = Thread(target = lambda self: self.event_generate("<<counter>>", when="tail"), args= (self, ))
         thread.start()
