@@ -1,6 +1,7 @@
 # wireless keyboard battery tester for windows
 # windows 10
 import Tkinter
+import tkMessageBox
 import pyHook
 import time
 from threading import Thread
@@ -47,11 +48,11 @@ class WKB_Tester(Tkinter.Tk):
         self.start_button = Tkinter.Button(self, text="Start", bg="lightgreen", command=self.start_counting, width=15)
         self.start_button.grid(row=4, column=1)
 
-        self.stop_button = Tkinter.Button(self, text="Stop", command=self.stop_counting, width=15)
-        self.stop_button.grid(row=4, column=2, padx=10)
+        self.pause_button = Tkinter.Button(self, text="Pause", command=self.toggle_pause, width=15)
+        self.pause_button.grid(row=4, column=2, padx=10)
 
         self.bind("<<counter>>", lambda event: self.counter())
-        
+
     def counter(self):
         self.count += 1
         print self.count
@@ -69,6 +70,7 @@ class WKB_Tester(Tkinter.Tk):
 
     def start_counting(self):
         print "Starting counting..."
+        self.start_button.config(state=Tkinter.DISABLED, bg="grey")
         self.start_time_var.set(time.strftime("%b %d %Y %H:%M:%S", time.localtime()))
         self.last_time_var.set("")
         self.num_of_keystrokes_var.set("")
@@ -76,14 +78,25 @@ class WKB_Tester(Tkinter.Tk):
         self.hookmanager.KeyDown = self.on_keyboard_event
         self.hookmanager.HookKeyboard()
 
-    def stop_counting(self):
-        print "Stopping counting..."
-        self.hookmanager.UnhookKeyboard()
+    def toggle_pause(self):
+       if self.pause_button.config("text")[-1] == "Pause":
+          print "Pausing counting..."
+          self.hookmanager.UnhookKeyboard()
+          self.pause_button.config(text="Resume")
+       else:
+          print "Resuming counting..."
+          self.hookmanager.HookKeyboard()
+          self.pause_button.config(text="Pause")
+
+    def close_program_warning(self):
+       if tkMessageBox.askokcancel("Really quit?", "Are you sure you want to quit?"):
+           self.quit()
 
 if __name__ == "__main__":
     top = WKB_Tester(None)
     top.title("Wireless Keyboard Battery Tester")
     top.wm_iconbitmap("icon.ico")
     top.configure(background="#ffffff")
+    top.protocol("WM_DELETE_WINDOW", top.close_program_warning)
 
     top.mainloop()
