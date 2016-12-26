@@ -8,13 +8,19 @@ TODO:
 - Fix the broken Windows tester.py - it cannot do a 'live' update of keystrokes pressed. May have something to do with threads
 - Capture the time of keystroke, so we can display the time the last keystroke was pressed, which will be useful for unattended tests.
 
+Updates
+--------
+- Linux version now captures start time and time of last keystroke
+- Linux version - space bar gives progress report without updating last keystroke time or counting a keystroke (useful when upi switch batteries with fresh ones - just press space bar to to report without updating the last keystroke time)
+
 Thoughts
 ---------
 - Hook up a wireless keyboard to a Raspberry Pi
-- More discussion at EEVBlog Batteroo testing
+- More discussion at EEVBlog Batteroo testing http://www.eevblog.com/forum/projects/batteroo-testing/
 
 Windows
 --------
+Currently broken
 
 A standalone .exe will be made once it's ready
 
