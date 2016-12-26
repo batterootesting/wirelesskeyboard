@@ -1,9 +1,9 @@
 # wireless keyboard battery tester for windows
 # windows 10
 import Tkinter
-import pythoncom
 import pyHook
 import time
+from threading import Thread
 
 class WKB_Tester(Tkinter.Tk):
     def __init__(self, parent):
@@ -38,6 +38,10 @@ class WKB_Tester(Tkinter.Tk):
         self.last_keystroke_label = Tkinter.Label(self, text="Last keystroke date and time:", bg="#ffffff", font=("Helvetica", 12))
         self.last_keystroke_label.grid(row=3, column=0, padx=20, sticky=Tkinter.W)
 
+        self.last_time_var = Tkinter.StringVar()
+        self.last_time = Tkinter.Label(self, textvariable=self.last_time_var, bg="#ffffff", font=("Helvetica", 12))
+        self.last_time.grid(row=3, column=1, columnspan=2, padx=20)
+
         self.grid_rowconfigure(4, pad=15)
 
         self.start_button = Tkinter.Button(self, text="Start", bg="lightgreen", command=self.start_counting, width=15)
@@ -46,23 +50,28 @@ class WKB_Tester(Tkinter.Tk):
         self.stop_button = Tkinter.Button(self, text="Stop", command=self.stop_counting, width=15)
         self.stop_button.grid(row=4, column=2, padx=10)
 
+        self.bind("<<counter>>", lambda event: self.counter())
+        
+    def counter(self):
+        self.count += 1
+        print self.count
+        self.num_of_keystrokes_var.set(str(self.count))
+        self.last_time_var.set(time.strftime("%b %d %Y %H:%M:%S", time.localtime()))
+
     def on_keyboard_event(self, event):
         print event.Key
         #print key_pressed.Ascii
 
-        def counter(self):
-            self.count += 1
-            print self.count
-            # *****  this function call causes the program to lock up *****
-            self.num_of_keystrokes_var.set(str(self.count))
-
-        counter(self)
+        thread = Thread(target = lambda self: self.event_generate("<<counter>>", when="tail"), args= (self, ))
+        thread.start()
 
         return True
 
     def start_counting(self):
         print "Starting counting..."
         self.start_time_var.set(time.strftime("%b %d %Y %H:%M:%S", time.localtime()))
+        self.last_time_var.set("")
+        self.num_of_keystrokes_var.set("")
         self.hookmanager = pyHook.HookManager()
         self.hookmanager.KeyDown = self.on_keyboard_event
         self.hookmanager.HookKeyboard()
